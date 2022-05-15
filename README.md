@@ -12,3 +12,16 @@ Typescript react project with webpack 5
     "match": "webpack --match",
     "build": "webpack"
    ```
+4. add `webpack.config.js` file
+   ```js
+   const path = require("path");
+   module.exports = {
+       mode: "development",
+       devtool: false,
+       devServer: {
+           static: {
+               directory: path.join(\_\_dirname, "dist"),
+            },
+        },
+    };
+   ```
