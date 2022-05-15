@@ -25,3 +25,29 @@ Typescript react project with webpack 5
         },
     };
    ```
+5. setup babel, install `npm i -D babel-loader @babel/corer @babel/preset-env`
+6. update `webpack.config.js`,
+   ```js
+   module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+    ],
+   },
+   ```
+7. add `babel.config.js`
+   ```js
+   module.exports = {
+     presets: ["@babel/preset-env"],
+   };
+   ```
+8. update `package.json` scripts,
+   ```js
+       "build":"NODE_ENV=production webpack",
+       "build:dev": "webpack",
+   ```

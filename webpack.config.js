@@ -1,9 +1,27 @@
 const path = require("path");
 
-module.exports = {
-  mode: "development",
+let mode = "development";
 
-  devtool: false,
+if (process.env.NODE_ENV === "production") {
+  mode = "production";
+}
+
+module.exports = {
+  mode,
+
+  devtool: "source-map",
+
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+    ],
+  },
 
   devServer: {
     static: {
