@@ -1,3 +1,5 @@
+const MinCssExtractPlugin = require("mini-css-extract-plugin");
+
 const path = require("path");
 
 let mode = "development";
@@ -14,6 +16,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.s?css$/i,
+        use: [
+          MinCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -23,9 +34,12 @@ module.exports = {
     ],
   },
 
+  plugins: [new MinCssExtractPlugin()],
+
   devServer: {
     static: {
       directory: path.join(__dirname, "dist"),
     },
+    hot: true,
   },
 };

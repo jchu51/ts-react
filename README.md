@@ -51,3 +51,62 @@ Typescript react project with webpack 5
        "build":"NODE_ENV=production webpack",
        "build:dev": "webpack",
    ```
+9. add css files
+
+   - `npm i -D css-loader mini-css-extract-plugin`
+   - udpate `webpack.config.js`
+
+     ```js
+      const MinCssExtractPlugin = require("mini-css-extract-plugin")
+      module: {
+         rules: [
+            {
+            test: /\.s?css$/i,
+               use: [
+                  MinCssExtractPlugin.loader,
+                     "css-loader",
+                ],
+            },
+      ],Î
+      plugins: [new MinCssExtractPlugin()],
+     ```
+
+10. install `npm i -D sass sass-loader`, change css file to scss file
+11. update `webpack.config.js`
+    ```js
+    module: {
+      rules: [
+         {
+         test: /\.s?css$/i,
+         use: [
+            MinCssExtractPlugin.loader,
+            "css-loader",
+            "sass-loader",
+         ],
+         },
+      ],
+    },
+    ```
+12. install `npm i -D postcss postcss-preset-env postcss-loader`
+    -update `webpack.config.js`
+    ```js
+    module: {
+      rules: [
+         {
+         test: /\.s?css$/i,
+         use: [
+            MinCssExtractPlugin.loader,
+            "css-loader",
+            "postcss-loader",
+            "sass-loader",
+         ],
+         },
+      ],
+    },
+    ```
+13. add `postcss.config.js`
+    ```js
+    module.exports = {
+      Plugin: ["postcss-preset-env"],
+   };
+   ```
