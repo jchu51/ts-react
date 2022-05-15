@@ -17,7 +17,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(s[ac]|c)css$/i,
+        test: /\.(s[ac]|c)ss$/i,
         use: [
           MinCssExtractPlugin.loader,
           "css-loader",
@@ -26,7 +26,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -36,6 +36,10 @@ module.exports = {
   },
 
   plugins: [new MinCssExtractPlugin()],
+
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
 
   devServer: {
     static: {
