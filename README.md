@@ -105,10 +105,20 @@ Typescript react project with webpack 5
     },
     ```
 13. add `postcss.config.js`
+
     ```js
     module.exports = {
       Plugin: ["postcss-preset-env"],
-   };
-   ```
+    };
+    ```
+
 14. add `.browserslistrc` file
 15. `npm i react react-dom` and `npm i -D @babel/preset-react`
+16. update `webpack.config.js`
+
+   ```js
+   resolve: {
+   extensions: [".js", ".jsx"],
+   },
+   ```
+17. add image config into webpack
