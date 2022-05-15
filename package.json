@@ -1,0 +1,33 @@
+{
+  "name": "ts-react",
+  "version": "1.0.0",
+  "description": "Typescript react project with webpack 5",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "webpack serve",
+    "match": "webpack --match",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jchu51/ts-react.git"
+  },
+  "keywords": [
+    "Typescript",
+    "React",
+    "Webpack 5"
+  ],
+  "author": "Jonathan Chueh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jchu51/ts-react/issues"
+  },
+  "homepage": "https://github.com/jchu51/ts-react#readme",
+  "devDependencies": {
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  }
+}
