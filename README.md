@@ -123,3 +123,4 @@ Typescript react project with webpack 5
    ```
 17. add image config into webpack
 18. `npm i -D html-webpack-plugin clean-webpack-plugin`
+19. `npm install -D @pmmmwh/react-refresh-webpack-plugin react-refresh`

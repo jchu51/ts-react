@@ -1,7 +1,19 @@
-const MinCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const { HotModuleReplacementPlugin } = require("webpack");
+
+const plugins = [
+  new CleanWebpackPlugin(),
+  new HotModuleReplacementPlugin(),
+  new MiniCssExtractPlugin(),
+  new HtmlWebpackPlugin({
+    template: "./src/index.html",
+  }),
+];
 
 let mode = "development";
 let target = "web";
@@ -10,13 +22,23 @@ if (process.env.NODE_ENV === "production") {
   target = "browserslist";
 }
 
+if (process.env.SERVE) {
+  // We only want React Hot Reloading in serve mode
+  plugins.push(new ReactRefreshWebpackPlugin());
+}
+
 module.exports = {
   mode,
   target,
   devtool: "source-map",
 
+  entry: {
+    main: "./src/index.jsx",
+  },
+
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.join(__dirname, "dist"),
+
     // this places all images processed in an image folder
     assetModuleFilename: "images/[hash][ext][query]",
   },
@@ -47,14 +69,14 @@ module.exports = {
       {
         test: /\.(s[ac]|c)ss$/i,
         use: [
-          MinCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
           "sass-loader",
         ],
       },
       {
-        test: /\.jsx?$/,
+        test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -63,18 +85,14 @@ module.exports = {
     ],
   },
 
-  plugins: [
-    new CleanWebpackPlugin(),
-    new MinCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-    }),
-  ],
+  plugins: plugins,
 
   resolve: {
     extensions: [".js", ".jsx"],
   },
-
+  optimization: {
+    runtimeChunk: "single",
+  },
   devServer: {
     static: {
       directory: path.join(__dirname, "dist"),
